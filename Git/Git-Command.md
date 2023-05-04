@@ -55,3 +55,26 @@ git config --global alias.ci commit
 git config --global alias.st status  
 git config --global alias.br branch  
 git config --global alias.co checkout  
+* バージョン管理したくないファイルを管理対象外とする  
+.gitignoreファイルに指定する。  
+#から始まる行はコメント  
+#指定したファイルを除外  
+index.html  
+#ルートディレクトリを指定  
+/root.html  
+#ディレクトリ以下を除外  
+dir/  
+#/以外の文字列にマッチ「*」
+/*/*.css
+* ワークツリーのファイルを元の状態に戻す(ワークツリーの状態をステージの状態と同じにする)  
+・ファイルの変更を取り消す  
+git checkout -- <ファイル名>  
+git checkout -- <ディレクトリ名>  
+・全変更を取り消す  
+git checkout -- . 
+* ステージに追加した変更を取り消す(リポジトリの最新のコミット（HEAD）の状態と同じにする)  
+git reset HEAD <ファイル名>  
+git reset HEAD <ディレクトリ名>  
+* 直前のコミットをやり直す(今のステージの状態でコミットを上書きする)  
+git commit --amend  
+※リモートリポジトリにpushしたコミットはやり直さない。
