@@ -45,6 +45,7 @@ git rm -cached <ファイル名>
 * ファイルの移動(ファイル名の変更)を記録する  
 git mv <旧ファイル> <新ファイル>
 * リモートリポジトリ（GitHub）を新規追加する  
+git remote add <リモート名> <リモートURL>
 git remote add origin https://github.com/user/repo.git  
 (originというショートカットでurlのリモートリポジトリを登録する)
 * リモートリポジトリ（GitHub）へ送信する  
@@ -78,3 +79,31 @@ git reset HEAD <ディレクトリ名>
 * 直前のコミットをやり直す(今のステージの状態でコミットを上書きする)  
 git commit --amend  
 ※リモートリポジトリにpushしたコミットはやり直さない。
+* リモートを表示する  
+git remote  
+git remote -v(対応するURLまで表示する)
+* リモートから情報取得  
+git fetch <リモート名>
+git fetch origin  
+→リモートからローカルリポジトリに情報取得するまでなので、ワークツリーまで反映させる場合はgit mergeを実施する必要がある。  
+git merge origin/master
+* リモートから情報取得してマージする  
+git pull <リモート名> <ブランチ名>  
+git pull origin master  
+git pull(省略可能)  
+→下記コマンドと実施していることは同じ  
+git fetch origin master  
+git merge origin/master
+
+* フェッチとプルの使い分け  
+基本的にはフェッチを推奨  
+プルの注意点  
+ワークツリーの現在いるブランチにマージされてしまう。  
+例）origin/hogeブランチをmasterブランチにマージしてしまう。。
+
+* リモートの詳細情報を表示する。
+git remote show <リモート名>
+* リモート名の変更  
+git remote rename <旧リモート名> <新リモート名>
+* リモートの削除  
+git remote rm <リモート名>
