@@ -141,4 +141,21 @@ git push -f（強制push）は絶対NG
 
 * fast-forwardマージをOFFにする。  
 git config --global merge.ff false  
-→別のブランチで作業した場合の作業履歴を残しておきたいため。
+→別のブランチで作業した場合の作業履歴を残しておきたいため。  
+作業履歴を残したい場合リベースよりマージを推奨。
+
+* プルの設定のマージ型・リベース型  
+マージ型  git pull <リモート名> <ブランチ名>  
+マージコミットが残る  
+リベース型 git pull --rebase <リモート名> <ブランチ名>  
+マージコミットが残らない（最新の内容を単純に取得したく、マージコミットを作成したくない場合、使用）  
+設定方法：git config --global pull.rebase true  
+git config branch.master.rebase true(masterブランチでpullする場合のみリベース)
+
+* コミットをきれいに整えてからPushしたい（GitHubにPushしていないコミットに対して実施）  
+1. 複数のコミットをやり直す git rebase -i <コミットID>  
+2. やり直したいcommitをeditにする  
+3. editの適用のところでコミットの適用がとまる。
+4. コミットの修正 git commit --amend  
+5. 次のコミットへ進む（リベース完了）  git rebase --continue  
+6. pickだとそのままのコミット内容を適用して次へいく
