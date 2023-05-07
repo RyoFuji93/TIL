@@ -159,3 +159,17 @@ git config branch.master.rebase true(masterブランチでpullする場合のみ
 4. コミットの修正 git commit --amend  
 5. 次のコミットへ進む（リベース完了）  git rebase --continue  
 6. pickだとそのままのコミット内容を適用して次へいく
+
+* 作業を一次避難する。  
+→作業途中でコミットしたくないけど、別のブランチで作業しないといけない場合に作業を一時避難する。
+git stash　(save)  
+* 避難した作業の一覧を表示する。  
+git stash list  
+* 避難した作業を復元する。  
+git stash apply(最新の状態の復元)  
+git stash apply --index（ステージの状況も復元する）  
+git stash apply [スタッシュ名]（特定の作業を復元する）  
+* 避難した作業の削除  
+git stash drop（最新の作業を削除）  
+git stash drop [スタッシュ名]（特定の作業を削除）  
+git stash clear(全作業を削除)  
