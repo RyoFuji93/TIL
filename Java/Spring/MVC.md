@@ -11,3 +11,10 @@
 ビジネスロジックはサービスクラスに実装する。
 
 @Serviceアノテーションを付与。
+
+# @Autowired
+Controllerクラスから、Serviceクラスを呼び時は、@Autowiredアノテーションを使用する。
+
+Spring　Bootがサービスクラスのインスタンスを自動で注入してくれる。
+
+⇒@Serviceや@Controllerや@Componentなど、Bean登録したクラスはDI管理対象となるため、@Autowiredでクラスを呼び出すことができる。
