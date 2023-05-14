@@ -48,7 +48,7 @@ Interfaceクラスだけを定義。実装クラスは不要。
 
 * Serviceクラス
 
-~~~
+~~~　
 @Service
 public class ItemService{
   @Autowired
