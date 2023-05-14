@@ -30,16 +30,6 @@ public class Item{
 
 @GeneratedValue:ID生成方針を定義する。GeneratedType.IDENTITYは、キー値生成をDBの機能で行う。(MYSQLではauto_incrementに対応する)
 
-* application.properties
-~~~
-# createを指定すると、アプリケーション起動時にEntityに対応するテーブルがあれば削除し、新規作成する
-spring.jpa.hibernate.ddl-auto=create
-# 実際に流れるＳＱＬを可視化
-spring.jpa.show-sql=true
-# 可視化されるＳＱＬを見やすく出力する
-spring.jpa.properties.hibernate.fomat_sql=true
-~~~ 
-
 * インターフェース
 
 インターフェースを定義するだけで、あらかじめ用意されたデータ操作を行うことができる。
