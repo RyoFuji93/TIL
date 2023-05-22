@@ -141,6 +141,10 @@ public class UserServiceImpl implements UseService {
 }
 ~~~
 
+* 推奨のインジェクション方法
+以下サイトより、コンストラクタインジェクションの方が推奨される模様。
+https://pppurple.hatenablog.com/entry/2016/12/29/233141
+
 
 ## 使用法
 SpringでDIを使用するには、Beanの登録とインジェクションを実施する必要がある。
