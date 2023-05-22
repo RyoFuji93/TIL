@@ -69,7 +69,8 @@ DIコンテナに管理させたいBeanをBean定義ファイルに登録する�
 @Component
 public class UserRepositoryImpl implements UseRepository {
     @Autowired
-    public UserRepositoryImpl(UserRepository userRepository, PasswordEncoder)
+    public UserRepositoryImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    }
 }
 ~~~
 1. Beanクラスに@Componentアノテーションを付与して、コンポーネントスキャンの対象にする。
@@ -84,6 +85,62 @@ public class AppConfig {
 ~~~
 
 @Componentアノテーションにてスキャン対象とするパッケージを指定する。
+
+## インジェクション方法
+* セッターインジェクション
+
+コンポーネントがセッターを持つ場合にそのセッターの引数に対して依存するコンポーネントを注入する方法。
+
+アノテーションベースの例）
+
+@Autowiredアノテーションをセッターメソッドに付与する。アノテーションベースの場合は、XMLやJavaConfigによる設定は不要。
+~~~ java
+@Component
+public class UserServiceImpl implements UseService {
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoderl
+    
+    @Autowired
+    public void setUserRepository(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
+    
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder){
+        this.passwordEncoder = passwordEncoder;
+    }
+}
+~~~
+
+* コンストラクタインジェクション
+アノテーションベースの場合、コンストラクタに@Autowiredを付与する。
+
+コンストラクタインジェクションのメリットとしては、フィールドにfinal修飾子をつけて、不変にできること。（他のインジェクション方法では実現できない）
+~~~ java
+@Component
+public class UserServiceImpl implements UseService {
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    }
+}
+~~~
+
+* フィールドインジェクション
+
+インジェクションしたいフィールドに@Autowiredを付与して使用。
+
+その他のコンストラクタやセッター不要で、コード量が少なくできる。（コンストラクタやセッター省略の場合、SpringのDIコンテナ使用前提）
+
+~~~ java 
+@Component
+public class UserServiceImpl implements UseService {
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;    
+}
+~~~
+
 
 ## 使用法
 SpringでDIを使用するには、Beanの登録とインジェクションを実施する必要がある。
