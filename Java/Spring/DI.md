@@ -29,6 +29,62 @@ Bean定義（クラス）。
 * ルックアップ  
 DIコンテナからBean取得すること。
 
+## Configration方法
+* JavaベースConfigration
+JavaベースConfigrationでBean登録定義を行う。（Java Config）
+~~~ java
+@Configration
+public class AppConfig{
+    @Bean
+    UserRepository userRepository() {
+        return new UserRepositoryImpl();
+    }
+~~~
+
+1. クラスに@Configrationアノテーションを付与し、コンフィグレーションクラスであることを宣言する。
+
+2. メソッドに@Beanアノテーションを付与し、Beanの定義を行う。メソッド名がBean名（@Bean(name="hoge")のように明示的に宣言することも可）、戻り値がそのBeanのインスタンスとして定義される。
+3. メソッドを呼び出して他のコンポーネントを参照する。
+
+Java Configの場合、メソッドの引数を追加することで他のコンポーネント（Bean）の参照ができる。ただし、引数のインスタンスは別途Bean定義されている必要あり。
+
+Java ConfigのみでConfigrationを行うときは、アプリケーションで使用するすべてのコンポーネントをBean定義する必要があるが、後述のアノテーションベースConfigrationと組み合わせることで設定を大幅に省略することができる。
+
+* XMLベースConfigration
+XMLファイルを利用してBean定義を行う。
+
+XMLの場合も、アプリケーションで使用するすべてのコンポーネントをBean定義する必要があるが、後述のアノテーションベースConfigrationと組み合わせることで設定を大幅に省略することができる。
+
+* アノテーションベースConfigration
+
+DIコンテナに管理させたいBeanをBean定義ファイルに登録するのではなく、Bean定義用のアノテーションが付与されたクラスをスキャンしてDIコンテナに登録する。
+
+⇒コンポーネントスキャンと呼ぶ。
+
+また、インジェクションもこれまでのように明示的に設定を行うのではなく、アノテーションを付与してDIコンテナに自動設定してもらう。
+
+⇒オートワイアリングと呼ぶ。
+
+~~~ java
+@Component
+public class UserRepositoryImpl implements UseRepository {
+    @Autowired
+    public UserRepositoryImpl(UserRepository userRepository, PasswordEncoder)
+}
+~~~
+1. Beanクラスに@Componentアノテーションを付与して、コンポーネントスキャンの対象にする。
+2. コンストラクタに@Autowiredアノテーションを付与して、オートワイアリングを行う。オートワイアリングはデフォルトで、対象の型が一致するBeanをDIコンテナから探し、見つかった場合にインジェクションする。
+
+コンポーネントスキャンを有効にするには、Bean定義ファイル（Java Config or XML）に設定を記述する。
+~~~ java
+@Configration
+@Conponent("com.example.demo")
+public class AppConfig {
+}
+~~~
+
+@Componentアノテーションにてスキャン対象とするパッケージを指定する。
+
 ## 使用法
 SpringでDIを使用するには、Beanの登録とインジェクションを実施する必要がある。
 * Bean登録
