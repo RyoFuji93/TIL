@@ -35,5 +35,13 @@ WEBに関連する依存関係が集約されている。
 * Jackson
 * SLF4J + Logback
 
+各依存ライブラリのバージョンは親pomであるspring-boot-starter-parentに定義されている。
+
+ここに指定されているバージョンがアプリケーションで使用するSpring Bootのバージョンとなる。
+
+以上により、必要な機能に応じたStarterを追加することで、必要なライブラリが追加され、AutoConfigureの@ConditionalOnClassが次々と有効になってその機能が設定なしで利用できるようになる。
+
+
+
 
 
