@@ -41,7 +41,33 @@ WEBに関連する依存関係が集約されている。
 
 以上により、必要な機能に応じたStarterを追加することで、必要なライブラリが追加され、AutoConfigureの@ConditionalOnClassが次々と有効になってその機能が設定なしで利用できるようになる。
 
+## 実行可能jarの作成
+従来の開発のようにwarを作成してアプリケーションサーバーにデプロイするという手順は不要。（Spring Boot自体にアプリケーションサーバーが組み込まれているため）
+パッケージングの方法もwarではなくjarを使用。jar単体でアプリケーションサーバーが実行すると起動。
 
+* 実行可能jarを作成するためのMavenコマンド
 
+./mvnw clean package
+
+⇒targetフォルダに以下の２つのjarファイルが作成される。
+
+アプリ名-0.0.1-SNAPSHOT.jar(アプリケーション単体のjar)
+
+アプリ名-0.0.1-SNAPSHOT.jar.original(実行可能jar(実行に必要な依存ライブラリのjarもすべて含まれている))
+
+* 実行可能jarはspring-boot-maven-pluginによって作成されるため、ビルド用プラグイン定義の中には以下の定義が必要となる。（Spring Initializr作成プロジェクトにはあらかじめ設定されている）
+~~~ xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+    </plugin>
+  </plugins>
+</build>
+~~~
+
+## Spring BootでSpring MVC
+Spring Bootでは、AutoConfigureによって、Spring MVCの多くの設定が自動で行われるため基本的には設定が不要となる。
 
 
