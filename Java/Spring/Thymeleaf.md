@@ -8,7 +8,11 @@ Javaのコード上にHTMLを直接記載できるが、表示ページの見た
 thymeleafはSpringと親和性が高いテンプレートエンジンである。(JSPではなくThymeleafが推奨されている)
 
 ## templateファイル
-classpath:/templates/に配置する。
+Javaと連携したい（動的に変更したい）ファイルは、classpath:/templates/に配置する。
 
 Controllerメソッドにて、対応するファイルを指定し、Javaとファイルを連携する。（ファイルの拡張子は省略可（.htmlなど））
+
+## 静的ファイル
+JavascriptファイルやCSSファイル、あるいは動的に変更のないHTMLファイルは、src/main/resources/staticに配置。
+
 
