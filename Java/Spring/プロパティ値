@@ -1,0 +1,17 @@
+# プロパティ設定
+application.propertyで設定したプロパティ値は、@Valueアノテーションでインジェクション可能。
+
+~~~ properties
+target.host=api.example.com
+target.port=8080
+~~~
+
+~~~ java
+public class HelloService {
+  @Value("${target.host}")
+  String host;
+  @Value("${target.post}")
+  int post;
+
+}
+~~~
