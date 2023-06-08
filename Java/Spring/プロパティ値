@@ -12,6 +12,10 @@ public class HelloService {
   String host;
   @Value("${target.post}")
   int post;
-
 }
 ~~~
+
+プロパティを使う側が、プロパティ名の文字列指定・プロパティ値の型を指定する必要がある。
+
+⇒@ConfigrationPropertiesを用いてプロパティ設定する。
+
