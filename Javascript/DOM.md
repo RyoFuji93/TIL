@@ -25,7 +25,12 @@ DOM ツリー内の任意の要素オブジェクトを表すノード。
 CSSセレクタに一致する子要素を検索するquerySelectAll()メソッド、要素のクラスを取得する classList メソッド、マークアップのテキスト内容を変更する innerHTML プロパティなどが含まれています。Element オブジェクトは、HTML 要素または SVG 要素のどちらかに対応する。
 
 - imgタグ
+
 HTMLElement の一種である HTMLMediaElement に属しており、srcで画像ソースにアクセスすることができる。
+
+- createElement
+
+Elementオブジェクト（HTML要素）を作成する。作成した要素はappendで追加する。
 
 ### NodeList
 要素のリストを表すデータ構造。リスト内の個々の要素は、item(index)関数や[]インデックス演算子を使ってアクセスできる。
