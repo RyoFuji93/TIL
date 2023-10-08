@@ -24,8 +24,33 @@ Spring FrameworkではApplicationContextがDIコンテナの役割を担う。
 DIコンテナにConfigrationを使用してコンポーネントを登録し、アプリケーションはApplication Contextインターフェースを通じてDIコンテナからBeanを取得する。
 * Bean  
 DIコンテナに登録するコンポーネント。
-* Configration  
-Bean定義（クラス）。
+
+DIコンテナが管理しているオブジェクト。「JavaBeans」とは直接の関係がなくSpring独自の用語。
+
+* Bean定義
+
+Beanを定義する情報のこと。
+
+管理させたいオブジェクトの具象クラスは何か？
+
+どの依存オブジェクトをインジェクションするか？
+
+というような情報。
+
+* Configration
+
+DIコンテナに読み込ませる情報。Configrationの中にBean定義も含まれる。
+
+開発者がConfigrationを記述してDIコンテナに読み込ませると、読み込んだconfigurationに従って、Beanとなるオブジェクトが生成され、依存オブジェクトがインジェクションされる。
+
+* ApplicationContext
+
+DIコンテナの別名。
+
+DIコンテナに該当するオブジェクトがApplicationContextというインターフェースを実装していることもあり、
+
+DIコンテナのことをしばしばApplicationContextと呼ぶことがある。
+
 * ルックアップ  
 DIコンテナからBean取得すること。
 
