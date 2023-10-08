@@ -144,8 +144,13 @@ public class UserServiceImpl implements UseService {
 ~~~ java
 @Component
 public class UserServiceImpl implements UseService {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){
+        this.userRepository = userRepository;
+    
     }
 }
 ~~~
@@ -168,8 +173,10 @@ public class UserServiceImpl implements UseService {
 
 * 推奨のインジェクション方法
 以下サイトより、コンストラクタインジェクションの方が推奨される模様。
+
 https://pppurple.hatenablog.com/entry/2016/12/29/233141
 
+https://qiita.com/yuto-hatano/items/69d01343f710117e4243
 
 ## 使用法
 SpringでDIを使用するには、Beanの登録とインジェクションを実施する必要がある。
