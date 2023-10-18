@@ -66,20 +66,22 @@ Cookie機能も自動で実装される。
 
 以下は、UserDetailServiceクラスを利用して、DBでユーザ情報を管理した場合のクラス。
 
+DBから、ユーザ情報を取得するクラスをConfigureで定義。（loadUserByUserNameを実装）
+
 ~~~ java
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
     private  final UserRepository userRepository;
 
-    @Override
+ @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
                 .map(
                         user -> new CustomerUserDetails(
                                 user.getUsername(),
                                 user.getPassword(),
-                                Collections.emptyList()
+                                toGrantedAuthorityList(user.getAuthority())
                         )
                 )
                 .orElseThrow(
@@ -87,6 +89,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                                 "Given username is not found. (username = '" + username +"')"
                         )
                 );
+    }
+
+    private List<GrantedAuthority> toGrantedAuthorityList(User.Authority authority) {
+        return Collections.singletonList(new SimpleGrantedAuthority(authority.name()));
     }
 }
 ~~~
