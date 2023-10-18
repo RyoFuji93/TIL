@@ -55,3 +55,9 @@ name=username,passwordはSpringWebSecurityのデフォルトのnameを使用。�
 </body>
 </html>
 ~~~
+
+## Cookie
+
+Cookie機能も自動で実装される。
+
+（レスポンスヘッダーにSetCookieあり）
