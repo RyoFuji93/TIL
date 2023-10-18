@@ -61,3 +61,32 @@ name=username,passwordはSpringWebSecurityのデフォルトのnameを使用。�
 Cookie機能も自動で実装される。
 
 （レスポンスヘッダーにSetCookieあり）
+
+# UserDetailsService
+
+以下は、UserDetailServiceクラスを利用して、DBでユーザ情報を管理した場合のクラス。
+
+~~~ java
+@Service
+@RequiredArgsConstructor
+public class CustomUserDetailsService implements UserDetailsService {
+    private  final UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
+                .map(
+                        user -> new CustomerUserDetails(
+                                user.getUsername(),
+                                user.getPassword(),
+                                Collections.emptyList()
+                        )
+                )
+                .orElseThrow(
+                        () -> new UsernameNotFoundException(
+                                "Given username is not found. (username = '" + username +"')"
+                        )
+                );
+    }
+}
+~~~
