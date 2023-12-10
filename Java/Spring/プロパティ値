@@ -19,3 +19,21 @@ public class HelloService {
 
 ⇒@ConfigrationPropertiesを用いてプロパティ設定する。
 
+# 独自プロパティファイル
+商用、STGなど環境ごとにプロパティを使用したい場合に用いる。
+
+→JavaConfigファイルに@PropertySourceを付けて指定する。@Profileでプロファイルを使用しての切り替えも可能。
+
+~~~ java
+@Configration
+@Profile("stg")
+@PropertySource("stg.properties")
+public class StgConfig
+~~~~
+
+~~~ java
+@Configration
+@Profile("prod")
+@PropertySource("prod.properties")
+public class ProdConfig
+~~~~
