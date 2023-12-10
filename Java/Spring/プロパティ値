@@ -37,3 +37,9 @@ public class StgConfig
 @PropertySource("prod.properties")
 public class ProdConfig
 ~~~~
+
+Configクラスを作らなくても、application-xxx.profilesというファイル名にして、
+
+プロファイルxxxを指定すれば、そのプロファイルに応じたプロパティの読み込み可能。
+
+例）apprication-stg.properties
